@@ -1,0 +1,5 @@
+sceneSetups:
+- path: Assets/Scenes/BossOrLastLevel.unity
+  isLoaded: 1
+  isActive: 1
+  isSubScene: 0

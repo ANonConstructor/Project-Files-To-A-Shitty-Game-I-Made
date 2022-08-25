@@ -1,0 +1,1 @@
+Make sure you have Unity Editor version 2020.3 LTS. I have 2020.3.15f2, but similar versions should work too.
