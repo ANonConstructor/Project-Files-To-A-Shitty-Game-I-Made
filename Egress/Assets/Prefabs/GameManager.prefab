@@ -416,8 +416,6 @@ MonoBehaviour:
   hpText: {fileID: 0}
   walkSpeed: 5
   health: 100
-  crawlingCollider: {fileID: 0}
-  walkingCollider: {fileID: 0}
   hasLegs: 0
   hasKnife: 0
   hasPistol: 0

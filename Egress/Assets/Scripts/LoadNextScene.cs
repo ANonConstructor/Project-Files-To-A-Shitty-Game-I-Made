@@ -21,8 +21,6 @@ public class LoadNextScene : MonoBehaviour
             gameManager.savedKnife = gameManager.hasKnife;
             gameManager.savedPistol = gameManager.hasPistol;
             gameManager.savedShotgun = gameManager.hasShotgun;
-            gameManager.crawlingCollider.enabled = false;
-            gameManager.walkingCollider.enabled = true;
         }
     }
     private void OnTriggerEnter2D(Collider2D collision)
@@ -35,8 +33,6 @@ public class LoadNextScene : MonoBehaviour
             gameManager.savedKnife = gameManager.hasKnife;
             gameManager.savedPistol = gameManager.hasPistol;
             gameManager.savedShotgun = gameManager.hasShotgun;
-            gameManager.crawlingCollider.enabled = false;
-            gameManager.walkingCollider.enabled = true;
         }
     }
 }

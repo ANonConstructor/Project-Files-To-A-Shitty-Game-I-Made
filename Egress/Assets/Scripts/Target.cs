@@ -49,7 +49,6 @@ public class Target : MonoBehaviour
         health -= amount;
         Flash(Color.white);
         soundSource.PlayOneShot(hitSound);
-        Debug.Log(health);
     }
     public void Flash(Color color)
     {

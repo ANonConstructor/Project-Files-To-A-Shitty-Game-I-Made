@@ -7,10 +7,8 @@ public class GameManager : MonoBehaviour
 {
     [Header("Other shit")]
     public TMP_Text hpText;
-    public int walkSpeed = 5;
+    public int walkSpeed = 100;
     public int health;
-    public BoxCollider2D crawlingCollider;
-    public BoxCollider2D walkingCollider;
 
     private static GameManager Instance;
 
@@ -58,7 +56,5 @@ public class GameManager : MonoBehaviour
         hasShotgun = savedShotgun;
         hpText = GameObject.Find("Health").GetComponent<TMP_Text>();
         hpText.text = "Health is " + health;
-        crawlingCollider.enabled = false;
-        walkingCollider.enabled = true;
     }
 }

@@ -26,8 +26,6 @@ public class Pickup : MonoBehaviour
         if(gameObject.name == "LegsPickup")
         {
             gameManager.hasLegs = true;
-            gameManager.crawlingCollider.enabled = false;
-            gameManager.walkingCollider.enabled = true;
         }
         else if (gameObject.name == "KnifePickup")
         {

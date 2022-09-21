@@ -10,25 +10,27 @@ public class Boss : MonoBehaviour
     public GameObject Magnet;
     public GameObject Magnet2;
     public GameObject Healthkit;
+    private GameObject player;
+    private GameObject boss;
 
     private TMP_Text bossHealthText;
     private float randomSpawnInterval;
     private int randomNumber;
-    private float randomSpawnLocation;
     public bool bossTrigger;
-    private Vector2 spawnLocation;
+    static private Vector2 spawnLocation;
     static private int enemiesOnScreen;
     IEnumerator Start()
     {
         targetScript = GetComponent<Target>();
-        //spawner = Spawner.Instance;
+        boss = this.gameObject;
+        player = GameObject.Find("Player");
         bossHealthText = GameObject.Find("BossHealth").GetComponent<TMP_Text>();
         bossHealthText.gameObject.SetActive(true);
         while (targetScript.health > 0)
         {
             yield return enemiesOnScreen > 10;
             yield return new WaitForSeconds(randomSpawnInterval);
-            enemySpawnCoroutine();
+            enemySpawn();
         }
     }
     private void Update()
@@ -36,21 +38,14 @@ public class Boss : MonoBehaviour
         bossHealthText.text = "Block Of Neodymium: " + targetScript.health;
         enemiesOnScreen = GameObject.FindGameObjectsWithTag("Enemy").Length;
     }
-    void enemySpawnCoroutine()
+    void enemySpawn()
     {
         randomSpawnInterval = Random.Range(1f, 2.5f);
-        randomNumber = Random.Range(1, 21);
-        randomSpawnLocation = Random.Range(1, 5);
-        switch (randomSpawnLocation)
+        randomNumber = Random.Range(1, 20);
+        GenerateSpawnLocation();
+        if((spawnLocation - (Vector2)player.transform.position).magnitude > 6 || (spawnLocation - (Vector2)boss.transform.position).magnitude > 9)
         {
-            case 1: spawnLocation = new Vector2(4.5f, 10);
-                break;
-            case 2: spawnLocation = new Vector2(-4.5f, 10);
-                break;
-            case 3: spawnLocation = new Vector2(0, 15);
-                break;
-            case 4: spawnLocation = new Vector2(0, 5);
-                break;
+            GenerateSpawnLocation();
         }
         if (randomNumber <= 2)
         {
@@ -64,7 +59,9 @@ public class Boss : MonoBehaviour
         {
             Instantiate(Magnet, spawnLocation, transform.rotation);
         }
-        
-        
+    }
+    void GenerateSpawnLocation()
+    {
+        spawnLocation = new Vector2(Random.Range(-3, 4), Random.Range(7, 15));
     }
 }

@@ -43,8 +43,6 @@ public class PlayerController : MonoBehaviour
         legAnimator = GameObject.Find("Legs").GetComponent<Animator>();
         gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
         playerSound = GameObject.Find("Player").GetComponent<AudioSource>();
-        gameManager.crawlingCollider = GetComponent<BoxCollider2D>();
-        gameManager.walkingCollider = GameObject.Find("Legs").GetComponent<BoxCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         flashMaterial = new Material(flashMaterial);
         originalMaterial = spriteRenderer.material;
@@ -66,13 +64,8 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            rb.MovePosition(rb.position + gameManager.walkSpeed * Time.fixedDeltaTime * movement);
+            rb.MovePosition(rb.position + movement.normalized * gameManager.walkSpeed * Time.fixedDeltaTime);
         }
-    }
-
-    void OnCollisionEnter(Collision collision)
-    {
-            rb.velocity = Vector3.zero;
     }
 
     private bool HasMouseMoved()
@@ -146,7 +139,7 @@ public class PlayerController : MonoBehaviour
                 isMelee = false;
                 isShotgun = true;
                 isGun = false;
-                firerate = 1;
+                firerate = 1.25f;
                 break;
             default:
                 isMelee = false;
@@ -187,10 +180,6 @@ public class PlayerController : MonoBehaviour
             StopCoroutine(meleeAnimation());
         }
         fireCoroutine = StartCoroutine(meleeAnimation());
-    }
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.DrawWireSphere(flashObj.transform.position, 0.5f);
     }
     private IEnumerator meleeAnimation()
     {
